@@ -1,0 +1,38 @@
+.featured {
+  height: 90vh;
+  position: relative;
+
+  .category {
+    position: absolute;
+    top: 80px;
+    left: 50px;
+    font-size: 30px;
+    font-weight: 500;
+    color: #ffff;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .details {
+    width: 35%;
+    position: absolute;
+    left: 50px;
+    bottom: 100px;
+    color: #ffff;
+    display: flex;
+    flex-direction: column;
+    img {
+      width: 400px;
+    }
+    .desc {
+      margin: 20px 0px;
+    }
+  }
+}
