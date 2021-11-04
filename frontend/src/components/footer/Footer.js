@@ -3,10 +3,10 @@ import './Footer.scss';
 
 const Footer = () => {
   return (
-    <footer class='footer'>
-      <div class='divider'></div>
-      <div class='footerContainer'>
-        <div class='footerLists'>
+    <footer className='footer'>
+      <div className='divider'></div>
+      <div className='footerContainer'>
+        <div className='footerLists'>
           <ul>
             <li>
               <a href='/'>FAQ</a>

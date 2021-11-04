@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import './Featured.scss';
 import { InfoOutlined, PlayArrow } from '@mui/icons-material';
 import Banner from '../../assets/film_title_banner.jpg';
@@ -12,6 +12,7 @@ import {
   MenuItem,
   OutlinedInput,
 } from '@mui/material';
+import axios from 'axios';
 
 const names = [
   'Adventure',
@@ -29,6 +30,24 @@ const Placeholder = ({ children }) => {
 
 const Featured = ({ type }) => {
   const [genre, setGenre] = useState('');
+  const [content, setContent] = useState({});
+
+  useEffect(() => {
+   const getRadomContent = async () => {
+     try {
+       const res = await axios.get(`/movie/random?type=${type}`, {
+        headers: {
+          token:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2ZjZGQwNzEzZjQ3MDQzMmIwMTY4MiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzNTgzMzI3NCwiZXhwIjoxNjM2MjY1Mjc0fQ.Ilu6bO4_7cm4IlHUFq-N_Y5yU37g-Clxi3Ptp5B-UYA',
+        },
+       })
+       setContent(res.data[0]);
+     } catch (error) {
+       console.log(error)
+     }
+   }
+   getRadomContent();
+  }, [type])
 
   const handleChange = (event) => {
     setGenre(event.target.value);
@@ -38,7 +57,7 @@ const Featured = ({ type }) => {
     <div className='featured'>
       {type && (
         <div className='category'>
-          <span>{type === 'movie' ? 'Movies' : 'TV Series'}</span>
+          <span>{type === 'movies' ? 'Movies' : 'TV Series'}</span>
           <Box sx={{ minWidth: 120, marginLeft: '12px' }}>
             <FormControl fullWidth>
               <Select
@@ -68,16 +87,11 @@ const Featured = ({ type }) => {
           </Box>
         </div>
       )}
-      <img width='100%' src={Banner} alt='profile' />
+      <img width='100%' src={content.image} alt='profile' />
       <div className='details'>
-        <img src={FilmTitle} alt='title' />
+        <img src={content.imageTitle} alt='title' />
         <span className='desc'>
-          Consequat do cupidatat eiusmod ipsum nostrud consequat esse laborum
-          reprehenderit elit fugiat labore et nulla. Enim officia non in aliqua
-          enim in dolore dolor aute cillum sit. Ullamco sint adipisicing ipsum
-          dolore consequat reprehenderit est dolor in et ad amet. Sint amet id
-          ea veniam mollit. Aute consectetur ullamco quis magna ad tempor
-          proident exercitation irure.
+          {content.description}
         </span>
         <Stack direction='row' spacing={2}>
           <Button

@@ -1,16 +1,45 @@
-import React from 'react'
+import React, { Fragment } from 'react';
 import './App.scss';
-import Home from './screens/home-page/Home'
+import Home from './screens/home-page/Home';
 import Video from './screens/video-page/Video';
 import Register from './screens/register/Register';
 import Login from './screens/login/Login';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 
 const App = () => {
-  return (
-    <div>
-     <Home />
-    </div>
-  )
-}
+  const user = true;
 
-export default App
+  return (
+    <Router>
+      <Switch>
+        <Route exact path='/'>
+          {user ? <Home /> : <Redirect to='/register' />}
+        </Route>
+        <Route path='/register'>
+          {!user ? <Register /> : <Redirect to='/' />}
+        </Route>
+        <Route path='/login'>{!user ? <Login /> : <Redirect to='/' />}</Route>
+        {user && (
+          <Fragment>
+            <Route path='/movies'>
+              <Home type='movies' />
+            </Route>
+            <Route path='/series'>
+              <Home type='series' />
+            </Route>
+            <Route path='/watch'>
+              <Video />
+            </Route>
+          </Fragment>
+        )}
+      </Switch>
+    </Router>
+  );
+};
+
+export default App;
