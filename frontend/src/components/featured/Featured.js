@@ -1,8 +1,6 @@
 import React, { useState , useEffect} from 'react';
 import './Featured.scss';
 import { InfoOutlined, PlayArrow } from '@mui/icons-material';
-import Banner from '../../assets/film_title_banner.jpg';
-import FilmTitle from '../../assets/film_title.png';
 import {
   FormControl,
   Box, 
@@ -57,7 +55,7 @@ const Featured = ({ type }) => {
     <div className='featured'>
       {type && (
         <div className='category'>
-          <span>{type === 'movies' ? 'Movies' : 'TV Series'}</span>
+          <span>{type === 'movie' ? 'Movies' : 'TV Series'}</span>
           <Box sx={{ minWidth: 120, marginLeft: '12px' }}>
             <FormControl fullWidth>
               <Select
@@ -89,7 +87,7 @@ const Featured = ({ type }) => {
       )}
       <img width='100%' src={content.image} alt='profile' />
       <div className='details'>
-        <img src={content.imageTitle} alt='title' />
+        <img src={content.imgTitle} alt='title' />
         <span className='desc'>
           {content.description}
         </span>

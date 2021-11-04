@@ -156,8 +156,7 @@ const NewMovie = () => {
                         <Select
                           label='Is Series'
                           onChange={handleChange}
-                          name='isSeries'
-                          defaultValue={'true'}
+                          name='isSeries'                          
                         >
                           <MenuItem value={'true'}>Yes</MenuItem>
                           <MenuItem value={'false'}>No</MenuItem>
