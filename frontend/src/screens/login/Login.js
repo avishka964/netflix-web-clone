@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import './Login.scss';
 import NetflixLogo from '../../assets/netflix_logo.png';
 import { Button, TextField } from '@mui/material';
+import {login} from '../../context/authContext/APICalls'
+import {AuthContext} from '../../context/authContext/AuthContext';
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { dispatch } = useContext(AuthContext);
+
+  
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login({ email, password }, dispatch);
+  };
+
   return (
     <div className='login'>
       <div className='top'>
@@ -28,6 +40,7 @@ const Login = () => {
                 backgroundColor: '#333',
               },
             }}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             className='textField'
@@ -42,6 +55,7 @@ const Login = () => {
                 color: '#FFFF',
               },
             }}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             variant='contained'
@@ -53,6 +67,7 @@ const Login = () => {
                 backgroundColor: '#E50914',
               },
             }}
+            onClick={handleLogin}
           >
             Sign In
           </Button>

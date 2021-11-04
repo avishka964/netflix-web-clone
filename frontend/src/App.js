@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import './App.scss';
 import Home from './screens/home-page/Home';
 import Video from './screens/video-page/Video';
@@ -10,9 +10,10 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import {AuthContext} from './context/authContext/AuthContext';
 
 const App = () => {
-  const user = true;
+  const {user} = useContext(AuthContext);
 
   return (
     <Router>

@@ -20,14 +20,16 @@ const names = [
   'Horror',
   'Romance',
   'Thriller',
+  'Drama',
+
 ];
 
 const Placeholder = ({ children }) => {
   return <div style={{ color: '#aaa' }}>{children}</div>;
 };
 
-const Featured = ({ type }) => {
-  const [genre, setGenre] = useState('');
+const Featured = ({ type,  setGenre}) => {
+  const [text, setText] = useState('');
   const [content, setContent] = useState({});
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const Featured = ({ type }) => {
        const res = await axios.get(`/movie/random?type=${type}`, {
         headers: {
           token:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2ZjZGQwNzEzZjQ3MDQzMmIwMTY4MiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzNTgzMzI3NCwiZXhwIjoxNjM2MjY1Mjc0fQ.Ilu6bO4_7cm4IlHUFq-N_Y5yU37g-Clxi3Ptp5B-UYA',
+          "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
         },
        })
        setContent(res.data[0]);
@@ -47,8 +49,9 @@ const Featured = ({ type }) => {
    getRadomContent();
   }, [type])
 
-  const handleChange = (event) => {
-    setGenre(event.target.value);
+  const handleChange = (e) => {
+    setText(e.target.value);
+    setGenre(e.target.value)
   };
 
   return (
@@ -62,11 +65,11 @@ const Featured = ({ type }) => {
                 displayEmpty
                 labelId='demo-simple-select-label'
                 id='demo-simple-select'
-                value={genre}
+                value={text}
                 onChange={handleChange}            
                 input={<OutlinedInput />}
                 renderValue={
-                  genre !== ''
+                  text !== ''
                     ? undefined
                     : () => <Placeholder>Select Genre</Placeholder>
                 }
