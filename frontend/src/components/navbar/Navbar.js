@@ -6,16 +6,23 @@ import { ArrowDropDown, Notifications, Search } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import {AuthContext} from '../../context/authContext/AuthContext';
 import {logout} from '../../context/authContext/AuthActions';
-
+import {useHistory} from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const {dispatch} = useContext(AuthContext)
+  const history = useHistory()
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
+
+  const handleLogout = () => {
+    dispatch(logout())
+    history.push('/login')
+
+  }
 
   return (
     <div className={isScrolled ? 'navbar scrolled' : 'navbar'}>
@@ -43,7 +50,7 @@ const Navbar = () => {
             <ArrowDropDown className='icon' />
             <div className='options'>
               <span>Setting</span>
-              <span onClick={() =>dispatch(logout())}>Logout</span>
+              <span onClick={handleLogout}>Logout</span>
             </div>
           </div>
         </div>

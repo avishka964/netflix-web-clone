@@ -30,12 +30,14 @@ const Home = ({ type }) => {
     getRandomList();
   }, [genre, type]);
 
+  console.log(lists)
+
   return (
     <div className='home'>
       <Navbar />
       <Featured type={type} setGenre={setGenre}/> 
-      {lists.map(list => (
-        <List list={list} />
+      {lists.map((list, index) => (
+        <List ker={index} list={list} />
       ))}
       <Footer />
     </div>

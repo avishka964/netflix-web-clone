@@ -37,6 +37,7 @@ const ListItems = ({ index, item }) => {
       style={{ left: isHovered && index * 225 - 50 + index * 2.5 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      
     >
       <img src={movie.image} alt='preview' />
       {isHovered && (

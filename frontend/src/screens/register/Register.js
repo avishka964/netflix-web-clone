@@ -103,7 +103,7 @@ const Register = () => {
               variant='filled'
               sx={{
                 backgroundColor: '#FFFF',
-                borderRadius: '5px',
+                borderRadius: '5px 0px 0px 5px'
               }}
             />
               <TextField
@@ -112,8 +112,7 @@ const Register = () => {
               label='User Name'
               variant='filled'
               sx={{
-                backgroundColor: '#FFFF',
-                borderRadius: '5px',
+                backgroundColor: '#FFFF',              
               }}
             />
             <Button            
@@ -132,6 +131,11 @@ const Register = () => {
             </Button>
           </form >
         )}
+
+          
+        
+      
+
       </div>
     </div>
   );
