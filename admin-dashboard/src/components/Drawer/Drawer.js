@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   AppBar,
   Box,
@@ -16,6 +16,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ProfileImg from '../../assets/avatar.jpg';
 import { DrawerWidgets } from './DrawerWidgets';
 import {RenderMenu, RenderMobileMenu} from './Menu';
+import { AuthContext } from '../../context/authContext/AuthContext';
+import {logout} from '../../context/authContext/AuthActions'
+import {useHistory} from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -26,6 +29,9 @@ function ApplicationDrawer(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const {dispatch} = useContext(AuthContext)
+  const history = useHistory()
+  
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,11 +42,15 @@ function ApplicationDrawer(props) {
   };
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
-    // localStorage.removeItem("user")
-    handleMobileMenuClose();
-   
+    setAnchorEl(null);    
+    handleMobileMenuClose();   
   };
+
+  const handleLogout = () => {
+    dispatch(logout())
+    history.push('/login')
+   
+  }
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -142,6 +152,7 @@ function ApplicationDrawer(props) {
         menuId={menuId}
         isMenuOpen={isMenuOpen}
         handleMenuClose={handleMenuClose}
+        handleLogout={handleLogout}
       />
       <Box
         component='nav'

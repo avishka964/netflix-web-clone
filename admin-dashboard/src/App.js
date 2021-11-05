@@ -29,7 +29,7 @@ const App = () => {
     <div>
       <Router>
         <Switch>
-          <Route path='/login'>{user ? <Redirect to='/' /> : <Login />}</Route>
+          <Route path='/login'>{user ?  <Redirect to='/' /> : <Login />}</Route>
           {user && (
             <>
               <ApplicationDrawer />
@@ -75,7 +75,7 @@ const App = () => {
                   <CategoryList />
                 </Route>
                 <Route path='/new-list'>
-                  <NewCategoryList/>
+                  <NewCategoryList />
                 </Route>
               </Box>{' '}
             </>

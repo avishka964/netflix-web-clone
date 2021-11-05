@@ -9,6 +9,8 @@ import {
   import ProfileImg from '../../assets/avatar.jpg';
   
   export const RenderMenu = (props) => (
+
+
       <Menu
         anchorEl={props.anchorEl}
         anchorOrigin={{
@@ -25,7 +27,7 @@ import {
         onClose={props.handleMenuClose}
       >
         <MenuItem onClick={props.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={props.handleMenuClose}>Logout</MenuItem>
+        <MenuItem onClick={props.handleLogout}>Logout</MenuItem>
       </Menu>
     );
   
